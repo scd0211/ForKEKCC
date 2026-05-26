@@ -147,15 +147,8 @@ int main(int argc, char** argv) {
 	// Output neutrino property tree (saved to a separate file)
 	TFile* outFile = new TFile(outFilename.c_str(), "RECREATE");
 	int numNu;
-	std::vector<int>* nuPDGCode = 0;
-	std::vector<double>* nuEnergy = 0;
-	std::vector<double>* xDirNu = 0;
-	std::vector<double>* yDirNu = 0;
-	std::vector<double>* zDirNu = 0;
-	std::vector<double>* xPosNu = 0;
-	std::vector<double>* yPosNu = 0;
-	std::vector<double>* zPosNu = 0;
-	std::vector<double>* weightPL = 0;
+	std::vector<int> nuPDGCode;
+	std::vector<double> nuEnergy;
 
 	TTree* neutrinoTree = new TTree("neutrinoTree", "");
 	neutrinoTree->Branch("numNu", &numNu);
@@ -198,15 +191,8 @@ int main(int argc, char** argv) {
 
 		// Clear the neutrino branch variables
 		numNu = 0;
-		nuPDGCode->clear();
-		nuEnergy->clear();
-		xDirNu->clear();
-		yDirNu->clear();
-		zDirNu->clear();
-		xPosNu->clear();
-		yPosNu->clear();
-		zPosNu->clear();
-		weightPL->clear();
+		nuPDGCode.clear();
+		nuEnergy.clear();
 
 		// Skip DAR if useDAR == false
 		if (kinE == 0 && !useDAR) continue;
@@ -388,8 +374,8 @@ int main(int argc, char** argv) {
 			for (int iNu = 0; iNu < nuPDG.size(); ++iNu) {
 				int PDG = nuPDG[iNu];
 				double energy = energyNu[iNu];
-				nuPDGCode->push_back(PDG);
-				nuEnergy->push_back(energy);
+				nuPDGCode.push_back(PDG);
+				nuEnergy.push_back(energy);
 			} // End of loop over neutrinos	
 
 		} // End loop over decays
